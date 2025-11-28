@@ -1,15 +1,7 @@
 <template>
   <div>
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <router-link to="/" class="logo">TopReviews</router-link>
-        <div class="nav-links">
-          <a href="/#categories">Categories</a>
-          <a href="/#about">About us</a>
-        </div>
-      </div>
-    </nav>
+    <Navbar />
 
     <!-- Rankings in this Category -->
     <div class="container">
@@ -87,6 +79,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import Navbar from '../components/Navbar.vue';
 
 const route = useRoute();
 const router = useRouter();

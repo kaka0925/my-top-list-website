@@ -192,17 +192,24 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { getAllCategories } from '../config/categories.js';
 
 const router = useRouter();
 const searchQuery = ref('');
 const showSuggestions = ref(false);
 
-const rankings = [
-  { title: 'Jump Starters', category: 'Automobile', url: '/jump-starter', keywords: ['jump starter', 'car battery', 'portable jump starter', 'battery booster'] },
-  { title: 'Tire Inflators', category: 'Automobile', url: '/tire-inflator', keywords: ['tire inflator', 'air compressor', 'portable inflator', 'tire pump'] },
-  { title: 'Dash Cams', category: 'Automobile', url: '/dash-cam', keywords: ['dash cam', 'dashboard camera', 'car camera', 'driving recorder'] },
-  { title: 'Air Dusters', category: 'Electronics', url: '/air-duster', keywords: ['air duster', 'electric duster', 'compressed air', 'computer cleaner'] }
-];
+// 自动从类目配置生成搜索索引
+const rankings = getAllCategories().map(cat => ({
+  title: cat.displayName,
+  category: cat.parentCategory,
+  url: cat.route,
+  keywords: [
+    cat.name.toLowerCase(),
+    cat.displayName.toLowerCase(),
+    cat.description,
+    ...cat.name.toLowerCase().split(' ')
+  ]
+}));
 
 const searchResults = computed(() => {
   const query = searchQuery.value.toLowerCase().trim();

@@ -1,15 +1,10 @@
 <template>
   <div>
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <router-link to="/" class="logo">TopReviews</router-link>
-        <div class="nav-links">
-          <a href="/#categories">Categories</a>
-          <a href="/#about">About us</a>
-        </div>
-      </div>
-    </nav>
+    <Navbar />
+
+    <!-- Breadcrumb Navigation -->
+    <Breadcrumb v-if="category" :categoryId="category" />
 
     <!-- Main Container -->
     <div class="container">
@@ -122,8 +117,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import Navbar from '../components/Navbar.vue';
 import ProductCard from '../components/ProductCard.vue';
 import CompareBar from '../components/CompareBar.vue';
+import Breadcrumb from '../components/Breadcrumb.vue';
 import { useProducts } from '../composables/useProducts.js';
 
 const route = useRoute();

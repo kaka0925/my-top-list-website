@@ -27,34 +27,18 @@
           <h2>🛠️ 快捷操作</h2>
           <div class="action-grid">
             <div class="action-card">
-              <h3>📝 编辑产品</h3>
-              <p>添加、修改或删除产品信息</p>
+              <h3>📝 编辑产品榜单</h3>
+              <p>通过可视化表单编辑完整的产品榜单数据，包括产品列表、对比表格、购买指南和FAQ</p>
               <button class="action-btn" @click="currentView = 'products'">
-                管理产品列表
+                开始编辑
               </button>
             </div>
 
-            <div class="action-card">
-              <h3>📊 对比表格</h3>
-              <p>编辑Quick Comparison数据</p>
-              <button class="action-btn" @click="currentView = 'comparison'">
-                编辑对比表格
-              </button>
-            </div>
-
-            <div class="action-card">
-              <h3>📖 购买指南</h3>
-              <p>编辑Buying Guide内容</p>
-              <button class="action-btn" @click="currentView = 'guide'">
-                编辑购买指南
-              </button>
-            </div>
-
-            <div class="action-card">
-              <h3>❓ FAQ管理</h3>
-              <p>添加或修改常见问题</p>
-              <button class="action-btn" @click="currentView = 'faq'">
-                管理FAQ
+            <div class="action-card action-card-disabled">
+              <h3>🔒 更多功能</h3>
+              <p>更多管理功能即将推出...</p>
+              <button class="action-btn" disabled>
+                敬请期待
               </button>
             </div>
           </div>
@@ -67,36 +51,9 @@
             <button @click="currentView = 'home'" class="close-btn">✕ 关闭</button>
           </div>
 
-          <!-- 产品管理 -->
+          <!-- 产品管理表单 -->
           <div v-if="currentView === 'products'">
-            <p style="text-align: center; padding: 40px; color: #666;">
-              产品管理表单开发中...<br>
-              目前请直接编辑JSON文件
-            </p>
-          </div>
-
-          <!-- 对比表格 -->
-          <div v-if="currentView === 'comparison'">
-            <p style="text-align: center; padding: 40px; color: #666;">
-              对比表格编辑器开发中...<br>
-              目前请直接编辑JSON文件
-            </p>
-          </div>
-
-          <!-- 购买指南 -->
-          <div v-if="currentView === 'guide'">
-            <p style="text-align: center; padding: 40px; color: #666;">
-              购买指南编辑器开发中...<br>
-              目前请直接编辑JSON文件
-            </p>
-          </div>
-
-          <!-- FAQ -->
-          <div v-if="currentView === 'faq'">
-            <p style="text-align: center; padding: 40px; color: #666;">
-              FAQ管理工具开发中...<br>
-              目前请直接编辑JSON文件
-            </p>
+            <ProductForm />
           </div>
         </div>
 
@@ -116,15 +73,13 @@
 
 <script setup>
 import { ref } from 'vue';
+import ProductForm from '../components/ProductForm.vue';
 
-const currentView = ref('home'); // 'home', 'products', 'comparison', 'guide', 'faq'
+const currentView = ref('home'); // 'home', 'products'
 
 const getViewTitle = () => {
   const titles = {
-    products: '产品列表管理',
-    comparison: '对比表格编辑',
-    guide: '购买指南编辑',
-    faq: 'FAQ管理'
+    products: '📝 产品榜单数据管理'
   };
   return titles[currentView.value] || '';
 };
@@ -227,7 +182,7 @@ const getViewTitle = () => {
 
 .action-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   margin-bottom: 30px;
 }
@@ -272,6 +227,20 @@ const getViewTitle = () => {
 
 .action-btn:hover {
   background: #5a8bc2;
+}
+
+.action-card-disabled {
+  opacity: 0.6;
+}
+
+.action-card-disabled .action-btn {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.action-card-disabled .action-btn:hover {
+  background: #ccc;
+  transform: none;
 }
 
 .editor-section {

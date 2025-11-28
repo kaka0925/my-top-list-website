@@ -1,15 +1,7 @@
 <template>
   <div>
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <router-link to="/" class="logo">TopReviews</router-link>
-        <div class="nav-links">
-          <a href="/#categories">Categories</a>
-          <a href="/#about">About us</a>
-        </div>
-      </div>
-    </nav>
+    <Navbar />
 
     <!-- Main Container -->
     <div class="container">
@@ -142,6 +134,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import Navbar from '../components/Navbar.vue';
 
 const router = useRouter();
 const compareProducts = ref([]);
