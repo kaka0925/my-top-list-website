@@ -15,7 +15,7 @@
           <div class="file-list">
             <h3>当前数据文件：</h3>
             <ul>
-              <li>✅ jump-starter-full.json - 已完善</li>
+              <li>✅ jump-starter.json - 已完善</li>
               <li>⏳ tire-inflator.json - 待填充</li>
               <li>⏳ dash-cam.json - 待填充</li>
               <li>⏳ air-duster.json - 待填充</li>

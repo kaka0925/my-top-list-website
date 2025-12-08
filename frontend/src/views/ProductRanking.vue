@@ -4,7 +4,7 @@
     <Navbar />
 
     <!-- Breadcrumb Navigation -->
-    <Breadcrumb v-if="category" :categoryId="category" />
+    <Breadcrumb :categoryId="props.category" />
 
     <!-- Main Container -->
     <div class="container">
@@ -27,6 +27,13 @@
 
       <!-- Products Listing -->
       <div class="rankings-section" v-else>
+        <div v-if="products.length === 0" style="text-align: center; padding: 40px;">
+          <p>No products found. Debug info:</p>
+          <p>Loading: {{ loading }}</p>
+          <p>Error: {{ error }}</p>
+          <p>Products count: {{ products.length }}</p>
+          <p>Page data: {{ pageData ? 'exists' : 'null' }}</p>
+        </div>
         <ProductCard
           v-for="product in products"
           :key="product.id"
@@ -116,17 +123,20 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
 import Navbar from '../components/Navbar.vue';
 import ProductCard from '../components/ProductCard.vue';
 import CompareBar from '../components/CompareBar.vue';
 import Breadcrumb from '../components/Breadcrumb.vue';
 import { useProducts } from '../composables/useProducts.js';
 
-const route = useRoute();
-const category = route.params.category;
+const props = defineProps({
+  category: {
+    type: String,
+    required: true
+  }
+});
 
-const { products, pageData, loading, error, fetchProducts } = useProducts(category);
+const { products, pageData, loading, error, fetchProducts } = useProducts(props.category);
 const activeFaq = ref(null);
 
 const toggleFaq = (index) => {
@@ -138,6 +148,6 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-/* Styles are in ranking-page.css */
+<style>
+@import '../assets/css/ranking-page.css';
 </style>

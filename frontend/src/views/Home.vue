@@ -1,15 +1,7 @@
 <template>
   <div>
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <div class="logo">TopReviews</div>
-        <div class="nav-links">
-          <a href="#categories">Categories</a>
-          <a href="#about">About us</a>
-        </div>
-      </div>
-    </nav>
+    <Navbar />
 
     <!-- Hero Banner -->
     <section class="hero-banner">
@@ -193,6 +185,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { getAllCategories } from '../config/categories.js';
+import Navbar from '../components/Navbar.vue';
 
 const router = useRouter();
 const searchQuery = ref('');

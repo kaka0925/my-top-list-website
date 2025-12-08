@@ -3,54 +3,67 @@
     <div class="nav-container">
       <router-link to="/" class="logo">TopReviews</router-link>
 
-      <!-- Search Box -->
-      <div class="nav-search-box">
-        <input
-          type="text"
-          v-model="searchQuery"
-          @input="handleSearch"
-          @keypress.enter="performSearch"
-          placeholder="Search products..."
-          autocomplete="off"
-        >
-        <button @click="performSearch" class="search-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
-        </button>
-        <div class="nav-search-suggestions" :class="{ active: showSuggestions }">
-          <div
-            v-for="item in searchResults"
-            :key="item.url"
-            class="nav-suggestion-item"
-            @click="navigateTo(item.url)"
-          >
-            <div class="nav-suggestion-title">{{ item.title }}</div>
-            <div class="nav-suggestion-category">{{ item.category }}</div>
-          </div>
-          <div v-if="searchQuery && searchResults.length === 0" class="nav-suggestion-item">
-            <div class="nav-suggestion-title">No results found</div>
+      <div class="nav-right">
+        <!-- Search Icon with Expandable Box -->
+        <div class="nav-search-wrapper" :class="{ expanded: isSearchExpanded }">
+          <button @click="toggleSearch" class="search-icon-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+          <div v-if="isSearchExpanded" class="nav-search-box">
+            <input
+              ref="searchInput"
+              type="text"
+              v-model="searchQuery"
+              @input="handleSearch"
+              @keypress.enter="performSearch"
+              placeholder="Search products..."
+              autocomplete="off"
+            >
+            <button @click="performSearch" class="search-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+            </button>
+            <div class="nav-search-suggestions" :class="{ active: showSuggestions }">
+              <div
+                v-for="item in searchResults"
+                :key="item.url"
+                class="nav-suggestion-item"
+                @click="navigateTo(item.url)"
+              >
+                <div class="nav-suggestion-title">{{ item.title }}</div>
+                <div class="nav-suggestion-category">{{ item.category }}</div>
+              </div>
+              <div v-if="searchQuery && searchResults.length === 0" class="nav-suggestion-item">
+                <div class="nav-suggestion-title">No results found</div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="nav-links">
-        <a href="/#categories">Categories</a>
-        <a href="/#about">About us</a>
+        <div class="nav-links">
+          <a href="/#categories">Categories</a>
+          <a href="/#about">About us</a>
+        </div>
       </div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import { getAllCategories } from '../config/categories.js';
 
 const router = useRouter();
 const searchQuery = ref('');
 const showSuggestions = ref(false);
+const isSearchExpanded = ref(false);
+const searchInput = ref(null);
 
 // 自动从类目配置生成搜索索引
 const rankings = getAllCategories().map(cat => ({
@@ -76,6 +89,17 @@ const searchResults = computed(() => {
   });
 });
 
+const toggleSearch = async () => {
+  isSearchExpanded.value = !isSearchExpanded.value;
+  if (isSearchExpanded.value) {
+    await nextTick();
+    searchInput.value?.focus();
+  } else {
+    searchQuery.value = '';
+    showSuggestions.value = false;
+  }
+};
+
 const handleSearch = () => {
   showSuggestions.value = searchQuery.value.length > 0;
 };
@@ -93,6 +117,7 @@ const performSearch = () => {
     router.push(match.url);
     showSuggestions.value = false;
     searchQuery.value = '';
+    isSearchExpanded.value = false;
   }
 };
 
@@ -100,12 +125,16 @@ const navigateTo = (url) => {
   router.push(url);
   showSuggestions.value = false;
   searchQuery.value = '';
+  isSearchExpanded.value = false;
 };
 
-// Close suggestions when clicking outside
+// Close suggestions and search box when clicking outside
 const handleClickOutside = (e) => {
-  if (!e.target.closest('.nav-search-box')) {
+  if (!e.target.closest('.nav-search-wrapper')) {
     showSuggestions.value = false;
+    if (isSearchExpanded.value && !searchQuery.value) {
+      isSearchExpanded.value = false;
+    }
   }
 };
 
@@ -138,6 +167,12 @@ onUnmounted(() => {
   gap: 20px;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .logo {
   font-size: 24px;
   font-weight: 700;
@@ -151,11 +186,51 @@ onUnmounted(() => {
   color: #5a8bc2;
 }
 
-/* Search Box */
-.nav-search-box {
+/* Search Wrapper */
+.nav-search-wrapper {
   position: relative;
-  flex: 1;
-  max-width: 400px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.search-icon-btn {
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.search-icon-btn:hover {
+  background: #f8f6f3;
+  color: #6b9bd1;
+}
+
+/* Expandable Search Box */
+.nav-search-box {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
 }
 
 .nav-search-box input {
@@ -166,12 +241,12 @@ onUnmounted(() => {
   font-size: 14px;
   outline: none;
   transition: all 0.3s;
-  background: #f8f6f3;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-search-box input:focus {
   border-color: #6b9bd1;
-  background: white;
 }
 
 .search-btn {
@@ -270,22 +345,23 @@ onUnmounted(() => {
     max-width: 100%;
     height: auto;
     padding: 12px 15px;
-    flex-wrap: wrap;
   }
 
   .logo {
     font-size: 20px;
   }
 
+  .nav-right {
+    gap: 8px;
+  }
+
   .nav-search-box {
-    order: 3;
-    flex: 1 1 100%;
-    max-width: 100%;
-    margin-top: 10px;
+    width: 250px;
+    right: -10px;
   }
 
   .nav-links {
-    gap: 15px;
+    gap: 12px;
   }
 
   .nav-links a {
