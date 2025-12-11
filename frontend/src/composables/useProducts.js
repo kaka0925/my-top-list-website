@@ -24,6 +24,34 @@ export function useProducts(category) {
       console.log('[useProducts] Data loaded:', data);
       console.log('[useProducts] Products count:', data.products?.length);
 
+      // 自动构建对比表格产品数据，从主产品列表中获取完整信息
+      if (data.comparisonTable && data.comparisonTable.products && data.products) {
+        data.comparisonTable.products = data.comparisonTable.products.map(compProduct => {
+          // 根据 id 查找主产品
+          const mainProduct = data.products.find(p => p.id === compProduct.id);
+
+          if (mainProduct) {
+            // 从主产品获取基础信息，保留对比表格中的规格数据
+            return {
+              id: mainProduct.id,
+              brand: mainProduct.brand,
+              title: mainProduct.title,
+              image: mainProduct.image,
+              amazonLink: mainProduct.amazonLink,
+              // 保留对比表格中定义的规格数据
+              peakAmps: compProduct.peakAmps,
+              batteryCapacity: compProduct.batteryCapacity,
+              airCompressor: compProduct.airCompressor,
+              fastCharge: compProduct.fastCharge,
+              price: compProduct.price,
+              score: compProduct.score
+            };
+          }
+          return compProduct;
+        });
+        console.log('[useProducts] Comparison table built from main product list');
+      }
+
       pageData.value = data;
       products.value = data.products || [];
       console.log('[useProducts] Products set to ref:', products.value.length);

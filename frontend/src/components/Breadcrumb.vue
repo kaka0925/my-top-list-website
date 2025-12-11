@@ -6,7 +6,7 @@
       </li>
       <li class="breadcrumb-separator">/</li>
       <li class="breadcrumb-item">
-        <a href="/#categories" class="breadcrumb-link">{{ parentCategory }}</a>
+        <router-link :to="`/category/${parentCategorySlug}`" class="breadcrumb-link">{{ parentCategory }}</router-link>
       </li>
       <li class="breadcrumb-separator">/</li>
       <li class="breadcrumb-item breadcrumb-current">
@@ -27,24 +27,33 @@ const props = defineProps({
   }
 });
 
+// 父类目名称到URL slug的映射
+const PARENT_CATEGORY_SLUG_MAP = {
+  'Automotive': 'automobile',
+  'Electronics': 'electronics',
+  'Home & Kitchen': 'home-kitchen',
+  'Sports & Outdoors': 'sports-outdoors',
+  'Health & Beauty': 'health-beauty',
+  'Tools & Home': 'tools-home'
+};
+
 const categoryInfo = computed(() => getCategoryInfo(props.categoryId));
 const parentCategory = computed(() => categoryInfo.value?.parentCategory || 'Products');
 const categoryName = computed(() => categoryInfo.value?.displayName || props.categoryId);
 const parentCategorySlug = computed(() => {
-  // 将父类目名转为URL锚点 (Automotive -> automotive, Electronics -> electronics)
-  return parentCategory.value.toLowerCase();
+  // 使用映射表将父类目名转为正确的URL slug
+  return PARENT_CATEGORY_SLUG_MAP[parentCategory.value] || parentCategory.value.toLowerCase();
 });
 </script>
 
 <style scoped>
 .breadcrumb {
-  background: #f8f6f3;
-  padding: 15px 0;
-  border-bottom: 1px solid #e8e8e8;
+  background: transparent;
+  padding: 8px 0;
 }
 
 .breadcrumb-list {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;

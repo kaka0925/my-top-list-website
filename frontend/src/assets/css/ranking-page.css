@@ -60,7 +60,7 @@ body {
 
 /* Container */
 .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 30px 20px;
 }
@@ -68,24 +68,27 @@ body {
 /* Page Header */
 .page-header {
     background: #ffffff;
-    padding: 35px 20px;
-    margin: -30px -20px 30px -20px;
-    text-align: center;
+    padding: 15px 20px;
+    margin: -30px 0 20px 0;
+    text-align: left;
     border-bottom: 1px solid #e8e8e8;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .page-header h1 {
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 700;
     color: #000000;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     letter-spacing: -0.9px;
 }
 
 .page-header .subtitle {
-    font-size: 15px;
+    font-size: 14px;
     color: #666666;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .last-updated {
@@ -141,8 +144,8 @@ body {
     background: white;
     border: 1px solid #e8e8e8;
     border-radius: 8px;
-    padding: 30px;
-    margin-bottom: 24px;
+    padding: 15px;
+    margin-bottom: 12px;
     transition: box-shadow 0.3s;
     position: relative;
 }
@@ -153,24 +156,24 @@ body {
 
 .product-rank {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 15px;
+    left: 15px;
     background: #1e88e5;
     color: white;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .compare-checkbox {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
 }
 
 .compare-checkbox input {
@@ -181,15 +184,15 @@ body {
 
 .product-content {
     display: grid;
-    grid-template-columns: 180px 1fr auto;
-    gap: 24px;
+    grid-template-columns: 200px 1fr auto;
+    gap: 15px;
     align-items: start;
-    margin-left: 40px;
+    margin-left: 36px;
 }
 
 .product-image img {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 150px;
     object-fit: contain;
     border-radius: 6px;
     background: #fafafa;
@@ -197,10 +200,10 @@ body {
 }
 
 .product-info h3 {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     color: #000000;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     letter-spacing: -0.4px;
 }
 
@@ -208,7 +211,7 @@ body {
     color: #1e88e5;
     font-weight: 600;
     font-size: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     text-transform: uppercase;
 }
 
@@ -216,7 +219,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .stars {
@@ -230,13 +233,13 @@ body {
 }
 
 .product-features {
-    margin: 16px 0;
+    margin: 10px 0;
 }
 
 .feature-item {
     display: flex;
     align-items: start;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-size: 13px;
     color: #333333;
 }
@@ -300,9 +303,9 @@ body {
 
 .expert-score {
     background: #f5f5f5;
-    padding: 12px;
+    padding: 10px;
     border-radius: 6px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .expert-score-label {
@@ -351,19 +354,258 @@ body {
     background: white;
     border: 1px solid #e8e8e8;
     border-radius: 8px;
-    padding: 30px;
-    margin-bottom: 30px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 .comparison-section h2 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     color: #000000;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     letter-spacing: -0.6px;
     text-align: center;
 }
 
+/* Horizontal scroll container */
+.comparison-scroll-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -15px;
+    padding: 0 15px;
+    position: relative;
+}
+
+.comparison-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.comparison-scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.comparison-scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.comparison-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Slider container */
+.comparison-slider {
+    display: flex;
+    gap: 0;
+    min-width: max-content;
+}
+
+/* Column styles */
+.comparison-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+    border-right: 1px solid #e8e8e8;
+}
+
+.comparison-column:last-child {
+    border-right: none;
+}
+
+/* Specs column (sticky) */
+.specs-column {
+    position: sticky;
+    left: 0;
+    z-index: 20;
+    background: #fafafa;
+    min-width: 160px;
+    font-weight: 600;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+    /* 添加伪元素来覆盖左侧可能露出的内容 */
+}
+
+.specs-column::before {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    background: #fafafa;
+    z-index: 20;
+}
+
+/* 在specs-column右侧添加一个遮罩层 */
+.specs-column::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: linear-gradient(to right, #fafafa 0%, #fafafa 50%, transparent 100%);
+    z-index: 21;
+    pointer-events: none;
+}
+
+/* Product column */
+.product-column {
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 1;
+    /* 确保内容不会溢出到左侧 */
+    isolation: isolate;
+}
+
+.product-column:hover {
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+/* Product header cell */
+.product-header-cell {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 2px solid #e8e8e8;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.specs-column .product-header-cell {
+    background: #fafafa;
+    justify-content: center;
+    min-height: 240px;
+    position: relative;
+    z-index: 20;
+}
+
+.spec-label-header {
+    font-size: 13px;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Product image in header */
+.product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background: #fafafa;
+    padding: 6px;
+}
+
+/* Product brand in header */
+.product-header-cell .product-brand {
+    color: #1e88e5;
+    font-weight: 700;
+    font-size: 10px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Product title in header */
+.product-header-cell .product-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    order: -3;
+}
+
+/* Check Price on Amazon Link */
+.check-price-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 6px;
+    width: 100%;
+    max-width: 130px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.25);
+}
+
+.check-price-link:hover {
+    background: linear-gradient(135deg, #fb8c00 0%, #ef6c00 100%);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.35);
+    transform: translateY(-1px);
+}
+
+.check-price-large {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+.check-price-small {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 2px;
+    letter-spacing: 0.2px;
+}
+
+/* Spec cell */
+.spec-cell {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 13px;
+    color: #333;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.specs-column .spec-cell {
+    background: #fafafa;
+    font-weight: 600;
+    color: #555;
+    position: relative;
+    z-index: 20;
+}
+
+.product-column .spec-cell {
+    justify-content: center;
+    text-align: center;
+}
+
+/* Comparison hint */
+.comparison-hint {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Legacy comparison table styles (for backward compatibility) */
 .comparison-table {
     width: 100%;
     border-collapse: collapse;
@@ -657,16 +899,16 @@ body {
     }
 
     .page-header {
-        padding: 25px 15px;
-        margin: -20px -15px 20px -15px;
+        padding: 12px 15px;
+        margin: -20px 0 15px 0;
     }
 
     .page-header h1 {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .page-header .subtitle {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .product-content {
@@ -779,6 +1021,74 @@ body {
     .comparison-table td {
         padding: 10px 8px;
         font-size: 11px;
+    }
+
+    /* Mobile optimizations for new comparison layout */
+    .comparison-scroll-container {
+        margin: 0 -10px;
+        padding: 0 10px;
+    }
+
+    .comparison-column {
+        min-width: 160px;
+    }
+
+    .specs-column {
+        min-width: 140px;
+    }
+
+    .product-header-cell {
+        padding: 12px 10px;
+        min-height: 260px;
+    }
+
+    .specs-column .product-header-cell {
+        min-height: 260px;
+    }
+
+    .product-image {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 8px;
+    }
+
+    .product-header-cell .product-brand {
+        font-size: 10px;
+        margin-bottom: 4px;
+    }
+
+    .product-header-cell .product-title {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+
+    .check-price-link {
+        max-width: 126px;
+        padding: 9px 11px;
+        margin-top: 6px;
+    }
+
+    .check-price-large {
+        font-size: 13px;
+    }
+
+    .check-price-small {
+        font-size: 9px;
+    }
+
+    .spec-label-header {
+        font-size: 12px;
+    }
+
+    .spec-cell {
+        padding: 12px 10px;
+        font-size: 12px;
+        min-height: 48px;
+    }
+
+    .comparison-hint {
+        font-size: 12px;
+        margin-top: 15px;
     }
 
     .vs-grid {

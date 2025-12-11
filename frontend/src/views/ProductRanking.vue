@@ -44,24 +44,54 @@
       <!-- Comparison Table -->
       <div class="comparison-section" v-if="pageData?.comparisonTable">
         <h2>{{ pageData.comparisonTable.title }}</h2>
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th v-for="header in pageData.comparisonTable.headers" :key="header">{{ header }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(row, index) in pageData.comparisonTable.rows" :key="index">
-              <td>{{ row.product }}</td>
-              <td>{{ row.peakAmps }}</td>
-              <td>{{ row.batteryCapacity }}</td>
-              <td>{{ row.airCompressor }}</td>
-              <td>{{ row.fastCharge }}</td>
-              <td>{{ row.price }}</td>
-              <td>{{ row.score }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="comparison-scroll-container">
+          <div class="comparison-slider">
+            <!-- Specs Labels Column (sticky) -->
+            <div class="comparison-column specs-column">
+              <div class="product-header-cell">
+                <div class="spec-label-header">Compare</div>
+              </div>
+              <div
+                class="spec-cell"
+                v-for="spec in pageData.comparisonTable.specs"
+                :key="spec.key"
+              >
+                <strong>{{ spec.label }}</strong>
+              </div>
+            </div>
+
+            <!-- Product Columns -->
+            <div
+              class="comparison-column product-column"
+              v-for="product in pageData.comparisonTable.products"
+              :key="product.id"
+              @click="navigateToAmazon(product.amazonLink)"
+            >
+              <!-- Product Header with Title, Image, Brand, Check Price Button -->
+              <div class="product-header-cell">
+                <div class="product-title">{{ product.title }}</div>
+                <img :src="product.image" :alt="product.title" class="product-image" />
+                <div class="product-brand">{{ product.brand }}</div>
+                <a :href="product.amazonLink" class="check-price-link" target="_blank" rel="noopener">
+                  <span class="check-price-large">Check Price</span>
+                  <span class="check-price-small">on Amazon</span>
+                </a>
+              </div>
+
+              <!-- Product Specs -->
+              <div
+                class="spec-cell"
+                v-for="spec in pageData.comparisonTable.specs"
+                :key="spec.key"
+              >
+                {{ product[spec.key] }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="comparison-hint">
+          👉 Scroll horizontally to compare more products • Click any column to view on Amazon
+        </div>
       </div>
 
       <!-- Buying Guide Section -->
@@ -141,6 +171,12 @@ const activeFaq = ref(null);
 
 const toggleFaq = (index) => {
   activeFaq.value = activeFaq.value === index ? null : index;
+};
+
+const navigateToAmazon = (link) => {
+  if (link && link !== '#') {
+    window.open(link, '_blank');
+  }
 };
 
 onMounted(() => {

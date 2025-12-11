@@ -24,23 +24,8 @@
         </div>
 
         <div class="product-features">
-          <div class="feature-item" v-for="(feature, index) in product.features" :key="index">
+          <div class="feature-item" v-for="(feature, index) in product.features.slice(0, 4)" :key="index">
             {{ feature }}
-          </div>
-        </div>
-
-        <div class="pros-cons">
-          <div class="pros">
-            <h4>✓ Pros</h4>
-            <ul>
-              <li v-for="(pro, index) in product.pros" :key="index">{{ pro }}</li>
-            </ul>
-          </div>
-          <div class="cons">
-            <h4>✗ Cons</h4>
-            <ul>
-              <li v-for="(con, index) in product.cons" :key="index">{{ con }}</li>
-            </ul>
           </div>
         </div>
       </div>

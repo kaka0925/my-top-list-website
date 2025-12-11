@@ -161,4 +161,38 @@ const response = await fetch(`/data/${category}.json`);
 const response = await fetch(`http://your-api.com/api/products/${category}`);
 ```
 
-其他代码无需修改！
+## 添加新榜单！
+⏺ 根据当前的架构，要添加"car vacuum"新类目，您只需要做3步修改即可完全适配所有功能：
+
+  需要修改的文件：
+
+  1. 创建JSON数据文件
+
+  frontend/public/data/car-vacuum.json
+  - 按照现有JSON格式（如jump-starter.json）创建产品数据
+
+  2. 添加类目配置
+
+  frontend/src/config/categories.js
+  在CATEGORIES对象中添加：
+  'car-vacuum': {
+    id: 'car-vacuum',
+    name: 'Car Vacuum',
+    displayName: 'Car Vacuums',
+    parentCategory: 'Electronics',  // 注意这里是Electronics
+    description: '车载吸尘器',
+    icon: '🧹',  // 可以选择合适的emoji
+    route: '/car-vacuum'
+  }
+
+  3. 添加路由配置
+
+  frontend/src/router/index.js
+  在routes数组中添加：
+  {
+    path: '/car-vacuum',
+    name: 'CarVacuum',
+    component: ProductRanking,
+    props: { category: 'car-vacuum' }
+  }
+  

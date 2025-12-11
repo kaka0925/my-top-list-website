@@ -54,7 +54,22 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    // 如果有保存的位置（浏览器前进/后退），使用保存的位置
+    if (savedPosition) {
+      return savedPosition;
+    }
+    // 如果有hash锚点，滚动到锚点位置
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth'
+      };
+    }
+    // 默认滚动到页面顶部
+    return { top: 0, behavior: 'smooth' };
+  }
 });
 
 export default router;

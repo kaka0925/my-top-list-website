@@ -211,7 +211,7 @@ const navigateToCategory = (slug) => {
 <style scoped>
 /* Container override for compact layout */
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 40px 20px 0;
 }

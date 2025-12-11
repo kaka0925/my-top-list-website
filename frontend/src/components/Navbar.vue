@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar">
     <div class="nav-container">
-      <router-link to="/" class="logo">TopReviews</router-link>
+      <router-link to="/" class="logo">
+        <img src="/logo.png" alt="TopReviews" />
+      </router-link>
 
       <div class="nav-right">
         <!-- Search Icon with Expandable Box -->
@@ -46,7 +48,7 @@
         </div>
 
         <div class="nav-links">
-          <a href="/#categories">Categories</a>
+          <router-link to="/">Categories</router-link>
           <a href="/#about">About us</a>
         </div>
       </div>
@@ -160,7 +162,7 @@ onUnmounted(() => {
   max-width: 800px; /* 原来是1200px，缩小到2/3 */
   margin: 0 auto;
   padding: 0 20px;
-  height: 70px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -174,16 +176,21 @@ onUnmounted(() => {
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: 700;
-  color: #6b9bd1;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-.logo:hover {
-  color: #5a8bc2;
+.logo img {
+  height: 70px;
+  width: auto;
+  transition: opacity 0.3s;
+}
+
+.logo:hover img {
+  opacity: 0.85;
 }
 
 /* Search Wrapper */
@@ -347,8 +354,8 @@ onUnmounted(() => {
     padding: 12px 15px;
   }
 
-  .logo {
-    font-size: 20px;
+  .logo img {
+    height: 35px;
   }
 
   .nav-right {
