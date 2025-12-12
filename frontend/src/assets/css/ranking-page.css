@@ -184,26 +184,41 @@ body {
 
 .product-content {
     display: grid;
-    grid-template-columns: 200px 1fr auto;
-    gap: 15px;
+    grid-template-columns: 187px 1fr auto;
+    gap: 20px;
     align-items: start;
     margin-left: 36px;
 }
 
-.product-image img {
-    width: 200px;
-    height: 150px;
+.product-card .product-image {
+    width: 100%;
+    height: 187px;
+    border-radius: 0;
+    overflow: hidden;
+    background: #ffffff;
+    position: relative;
+    padding: 30px;
+}
+
+.product-card .product-image-bg {
+    display: none;
+}
+
+.product-card .product-image-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    border-radius: 6px;
-    background: #fafafa;
-    padding: 12px;
+    object-position: center;
 }
 
 .product-info h3 {
     font-size: 17px;
     font-weight: 700;
     color: #000000;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
     letter-spacing: -0.4px;
 }
 
@@ -306,27 +321,51 @@ body {
     padding: 10px;
     border-radius: 6px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .expert-score-label {
-    font-size: 11px;
+    font-size: 10px;
     color: #999999;
     text-transform: uppercase;
     letter-spacing: 0.4px;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .expert-score-value {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
     color: #1e88e5;
+    margin-bottom: 6px;
+}
+
+.stars-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 6px 0 4px;
+}
+
+.stars-rating .stars {
+    color: #ffa500;
+    font-size: 13px;
+}
+
+.stars-rating .rating-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+}
+
+.reviews-count {
+    font-size: 10px;
+    color: #666;
+    font-weight: 500;
 }
 
 .product-price {
-    font-size: 20px;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 12px;
+    display: none;
 }
 
 .buy-button {
@@ -912,64 +951,131 @@ body {
     }
 
     .product-content {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         margin-left: 0;
         gap: 16px;
+        position: relative;
     }
 
     .product-rank {
-        position: static;
-        margin-bottom: 12px;
+        position: absolute;
+        top: 8px;
+        left: 8px;
         width: 36px;
         height: 36px;
         font-size: 16px;
+        z-index: 2;
     }
 
     .compare-checkbox {
-        top: 70px;
+        top: 8px;
+        right: 8px;
     }
 
-    .product-image img {
+    .product-image-wrapper {
+        width: 85%;
+        margin: 0 auto 16px;
+    }
+
+    .product-card .product-image {
         width: 100%;
-        max-width: 200px;
         height: auto;
-        margin: 0 auto;
-        display: block;
+        min-height: 180px;
+        margin: 0;
+        background: #ffffff;
+        padding: 25px;
+    }
+
+    .product-card .product-image-bg {
+        filter: blur(12px);
+        opacity: 0.25;
+    }
+
+    .product-card .product-image-main {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .product-info h3 {
         font-size: 16px;
-    }
-
-    .product-brand {
-        font-size: 11px;
+        text-align: left;
+        padding-left: 16px;
     }
 
     .product-features {
         margin: 12px 0;
+        padding-left: 16px;
     }
 
     .feature-item {
         font-size: 12px;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
+        justify-content: flex-start;
+        text-align: left;
     }
 
     .product-action {
+        position: static;
         width: 100%;
-        min-width: auto;
+        margin-top: 16px;
+        padding: 0 16px;
+    }
+
+    .expert-score {
+        background: rgba(245, 245, 245, 0.95);
+        padding: 8px 10px;
+        margin-bottom: 12px;
+    }
+
+    .expert-score-label {
+        font-size: 9px;
     }
 
     .expert-score-value {
-        font-size: 22px;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .stars-rating {
+        margin: 4px 0 3px;
+    }
+
+    .stars-rating .stars {
+        font-size: 11px;
+    }
+
+    .stars-rating .rating-value {
+        font-size: 10px;
+    }
+
+    .reviews-count {
+        font-size: 9px;
     }
 
     .product-price {
         font-size: 18px;
+        text-align: center;
+        margin-bottom: 12px;
     }
 
     .buy-button {
-        padding: 10px 20px;
-        font-size: 12px;
+        padding: 12px 24px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .amazon-badge {
+        margin-top: 8px;
+    }
+
+    .product-info {
+        width: 100%;
+        padding-top: 0;
     }
 
     .pros-cons {
@@ -1113,4 +1219,99 @@ body {
     .nav-links a {
         font-size: 13px;
     }
+}
+
+/* Enhanced Product Card Styles */
+
+/* Image Wrapper */
+.product-image-wrapper {
+    position: relative;
+}
+
+/* Ribbon Badge for Best Overall, Most Reviewed, etc. - Enhanced Parallelogram Style */
+.ribbon-badge {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    transform: skewX(-15deg);
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    color: white;
+    padding: 5px 20px 5px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 3px 12px rgba(255, 152, 0, 0.4);
+    z-index: 3;
+    white-space: nowrap;
+    position: relative;
+    overflow: visible;
+}
+
+/* Left fold effect */
+.ribbon-badge::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 26px 0;
+    border-color: transparent #e65100 transparent transparent;
+    transform: skewX(15deg);
+}
+
+/* Right arrow effect */
+.ribbon-badge::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%) skewX(15deg);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 13px 0 13px 10px;
+    border-color: transparent transparent transparent #f57c00;
+}
+
+/* Top highlight */
+.ribbon-badge:before:first-of-type {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Features with check icons */
+.product-features .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #333;
+}
+
+.product-features .feature-item::before {
+    display: none;
+}
+
+.feature-icon {
+    flex-shrink: 0;
+}
+
+
+/* Amazon Badge */
+.amazon-badge {
+    text-align: center;
+    margin-top: 8px;
+}
+
+.amazon-badge span {
+    font-size: 11px;
+    color: #666;
+    font-weight: 500;
 }

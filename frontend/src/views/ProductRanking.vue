@@ -6,6 +6,14 @@
     <!-- Breadcrumb Navigation -->
     <Breadcrumb :categoryId="props.category" />
 
+    <!-- Promotion Modal -->
+    <ProductPromotionModal
+      v-if="showModal && products.length > 0"
+      :product="products[0]"
+      :show="showModal"
+      @close="showModal = false"
+    />
+
     <!-- Main Container -->
     <div class="container">
       <!-- Page Header -->
@@ -152,11 +160,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import Navbar from '../components/Navbar.vue';
 import ProductCard from '../components/ProductCard.vue';
 import CompareBar from '../components/CompareBar.vue';
 import Breadcrumb from '../components/Breadcrumb.vue';
+import ProductPromotionModal from '../components/ProductPromotionModal.vue';
 import { useProducts } from '../composables/useProducts.js';
 
 const props = defineProps({
@@ -168,6 +177,15 @@ const props = defineProps({
 
 const { products, pageData, loading, error, fetchProducts } = useProducts(props.category);
 const activeFaq = ref(null);
+const showModal = ref(false);
+
+// Show modal when products are loaded
+watch(products, (newProducts) => {
+  if (newProducts && newProducts.length > 0 && !loading.value) {
+    // Show modal after products are loaded
+    showModal.value = true;
+  }
+}, { immediate: true });
 
 const toggleFaq = (index) => {
   activeFaq.value = activeFaq.value === index ? null : index;

@@ -15,6 +15,8 @@
       "expertScore": 9.8,
       "price": "$159.99",
       "amazonLink": "https://www.amazon.com/dp/B0CRRKRJ2S?th=1",
+      "badge": "Best Overall",
+      "salesLast30Days": 12500,
       "features": [
         "4000A peak output powers all gas and 12L diesel engines",
         "Built-in 160PSI air compressor inflates tires in 3 minutes",
@@ -53,6 +55,8 @@
       "expertScore": 9.3,
       "price": "$79.99",
       "amazonLink": "https://www.amazon.com/dp/B0DGSJWN8D?th=1",
+      "badge": "Best Value",
+      "salesLast30Days": 8200,
       "features": [
         "3000A peak for 8L gas and 6L diesel vehicles",
         "IP64 water-resistant rating for all-weather use",
@@ -167,6 +171,8 @@
       "expertScore": 9.1,
       "price": "$99.99",
       "amazonLink": "https://www.amazon.com/dp/B015TKUPIC/?th=1",
+      "badge": "Most Reviewed",
+      "salesLast30Days": 15600,
       "features": [
         "1000A output provides 20 jumps per charge on 6L gas engines",
         "UltraSafe spark-proof technology with reverse polarity protection",

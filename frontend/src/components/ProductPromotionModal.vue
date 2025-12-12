@@ -21,6 +21,7 @@
 
           <!-- Product Image -->
           <div class="product-image-container">
+            <img :src="product.image" :alt="product.title" class="product-image-bg" />
             <img :src="product.image" :alt="product.title" class="product-image" />
           </div>
 
@@ -83,7 +84,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 
 const props = defineProps({
   product: {
@@ -100,15 +101,43 @@ const emit = defineEmits(['close']);
 
 const isVisible = ref(false);
 
+// Watch for prop changes
+watch(() => props.show, (newVal) => {
+  if (newVal) {
+    // Random delay between 3-5 seconds
+    const delay = Math.random() * 2000 + 3000;
+    setTimeout(() => {
+      isVisible.value = true;
+    }, delay);
+  }
+});
+
 onMounted(() => {
-  // Show modal after a short delay for better UX
-  setTimeout(() => {
-    isVisible.value = props.show;
-  }, 500);
+  // Show modal after 3-5 seconds delay
+  if (props.show) {
+    const delay = Math.random() * 2000 + 3000;
+    setTimeout(() => {
+      isVisible.value = true;
+    }, delay);
+  }
+  // Add Escape key listener
+  document.addEventListener('keydown', handleKeydown);
+  // Prevent body scroll when modal is open
+  if (isVisible.value) {
+    document.body.style.overflow = 'hidden';
+  }
+});
+
+onUnmounted(() => {
+  // Clean up event listener
+  document.removeEventListener('keydown', handleKeydown);
+  // Restore body scroll
+  document.body.style.overflow = '';
 });
 
 const closeModal = () => {
   isVisible.value = false;
+  document.body.style.overflow = '';
   setTimeout(() => {
     emit('close');
   }, 300);
@@ -126,8 +155,13 @@ const handleKeydown = (e) => {
   }
 };
 
-onMounted(() => {
-  document.addEventListener('keydown', handleKeydown);
+// Watch visibility to control body scroll
+watch(isVisible, (newVal) => {
+  if (newVal) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
 });
 </script>
 
@@ -215,19 +249,35 @@ onMounted(() => {
 }
 
 .product-image-container {
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
-  padding: 60px 40px 40px;
+  position: relative;
+  padding: 60px 0 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 280px;
+  overflow: hidden;
+  background: #f5f7fa;
+}
+
+.product-image-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(20px);
+  opacity: 0.4;
+  transform: scale(1.1);
 }
 
 .product-image {
-  max-width: 100%;
+  position: relative;
+  max-width: 90%;
   max-height: 240px;
   object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  z-index: 1;
 }
 
 .modal-content {
@@ -397,11 +447,12 @@ onMounted(() => {
   }
 
   .product-image-container {
-    padding: 50px 30px 30px;
+    padding: 50px 0 30px;
     min-height: 240px;
   }
 
   .product-image {
+    max-width: 85%;
     max-height: 200px;
   }
 
