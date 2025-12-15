@@ -184,12 +184,14 @@ watch(isVisible, (newVal) => {
 .modal-container {
   background: #ffffff;
   border-radius: 16px;
-  max-width: 480px;
+  max-width: 600px;
   width: 100%;
   position: relative;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   animation: slideUp 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes slideUp {
@@ -250,13 +252,11 @@ watch(isVisible, (newVal) => {
 
 .product-image-container {
   position: relative;
-  padding: 60px 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 280px;
+  width: 100%;
+  height: 250px;
   overflow: hidden;
   background: #f5f7fa;
+  flex-shrink: 0;
 }
 
 .product-image-bg {
@@ -272,16 +272,19 @@ watch(isVisible, (newVal) => {
 }
 
 .product-image {
-  position: relative;
-  max-width: 90%;
-  max-height: 240px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
   z-index: 1;
 }
 
 .modal-content {
-  padding: 32px 28px 28px;
+  padding: 24px 28px 28px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .brand-tag {

@@ -104,30 +104,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>About TopReviews</h3>
-          <p>We provide honest, expert reviews and buying guides to help you make informed purchasing decisions.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Legal</h3>
-          <ul class="footer-links">
-            <li><a href="#terms">Terms and Conditions</a></li>
-            <li><a href="#privacy">Privacy Policy</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Support</h3>
-          <ul class="footer-links">
-            <li><a href="#contact">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 TopReviews. All rights reserved.</p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 </template>
 
@@ -135,6 +112,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.vue';
 
 const router = useRouter();
 const compareProducts = ref([]);

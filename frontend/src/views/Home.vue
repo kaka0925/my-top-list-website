@@ -5,10 +5,11 @@
 
     <!-- Hero Banner -->
     <section class="hero-banner">
-      <div class="hero-content">
-        <h1>Search. Compare. Choose.</h1>
-        <p>We analyze the top products in every category so you can compare what truly matters and choose the best for you.</p>
-        <div class="search-box">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Search. Compare. Choose.</h1>
+          <p>We analyze the top products in every category so you can compare what truly matters and choose the best for you.</p>
+          <div class="search-box">
           <input
             type="text"
             v-model="searchQuery"
@@ -33,6 +34,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -79,8 +81,9 @@
     <!-- Categories Section -->
     <section class="categories-section" id="categories">
       <div class="container">
-        <h2 class="section-title">Browse by Category</h2>
-        <div class="categories-grid-browse">
+        <div class="categories-content">
+          <h2 class="section-title">Browse by Category</h2>
+          <div class="categories-grid-browse">
           <div class="category-item" @click="navigateToCategory('automobile')">
             <div class="category-icon">
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -141,43 +144,12 @@
             <div class="category-name">Tools & Home</div>
           </div>
         </div>
+        </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer" id="about">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>TopReviews</h3>
-          <p>Your ultimate destination for comprehensive comparisons and reviews of the top products across a wide range of categories.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Company</h3>
-          <ul class="footer-links">
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Legal</h3>
-          <ul class="footer-links">
-            <li><a href="#terms">Terms and Conditions</a></li>
-            <li><a href="#privacy">Privacy Policy</a></li>
-            <li><a href="#ccpa">CCPA Privacy Notice</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Support</h3>
-          <ul class="footer-links">
-            <li><a href="#data-request">Data Subject Request Form</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 TopReviews. All rights reserved.</p>
-      </div>
-    </footer>
+    <Footer id="about" />
   </div>
 </template>
 
@@ -186,6 +158,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { getAllCategories } from '../config/categories.js';
 import Navbar from '../components/Navbar.vue';
+import Footer from '../components/Footer.vue';
 
 const router = useRouter();
 const searchQuery = ref('');

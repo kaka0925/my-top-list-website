@@ -4,6 +4,8 @@ import ProductRanking from '../views/ProductRanking.vue';
 import ComparePage from '../views/ComparePage.vue';
 import AdminPanel from '../views/AdminPanel.vue';
 import CategoryPage from '../views/CategoryPage.vue';
+import LegalPage from '../views/LegalPage.vue';
+import ContactPage from '../views/ContactPage.vue';
 
 const routes = [
   {
@@ -49,6 +51,29 @@ const routes = [
     name: 'AirDuster',
     component: ProductRanking,
     props: { category: 'air-duster' }
+  },
+  {
+    path: '/terms',
+    name: 'Terms',
+    component: LegalPage,
+    props: { type: 'terms' }
+  },
+  {
+    path: '/privacy',
+    name: 'Privacy',
+    component: LegalPage,
+    props: { type: 'privacy' }
+  },
+  {
+    path: '/ccpa',
+    name: 'CCPA',
+    component: LegalPage,
+    props: { type: 'ccpa' }
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: ContactPage
   }
 ];
 

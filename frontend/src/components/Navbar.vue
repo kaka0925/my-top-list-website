@@ -159,7 +159,7 @@ onUnmounted(() => {
 }
 
 .nav-container {
-  max-width: 800px; /* 原来是1200px，缩小到2/3 */
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
   height: 30px;

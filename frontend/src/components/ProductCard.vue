@@ -23,6 +23,19 @@
       </div>
 
       <div class="product-info">
+        <!-- Expert Score above title -->
+        <div class="expert-score">
+          <div class="expert-score-value">{{ product.expertScore }}</div>
+
+          <!-- Star Rating -->
+          <div class="stars-rating">
+            <span class="stars">{{ getStars(product.rating) }}</span>
+          </div>
+
+          <!-- Reviews Count -->
+          <div class="reviews-count">{{ product.reviews.toLocaleString() }} reviews</div>
+        </div>
+
         <h3>{{ product.title }}</h3>
 
         <!-- Features with icons -->
@@ -38,17 +51,6 @@
       </div>
 
       <div class="product-action">
-        <div class="expert-score">
-          <div class="expert-score-value">{{ product.expertScore }}</div>
-
-          <!-- Star Rating -->
-          <div class="stars-rating">
-            <span class="stars">{{ getStars(product.rating) }}</span>
-          </div>
-
-          <!-- Reviews Count -->
-          <div class="reviews-count">{{ product.reviews.toLocaleString() }} reviews</div>
-        </div>
         <div class="product-price">{{ product.price }}</div>
         <a :href="product.amazonLink" class="buy-button" target="_blank" rel="noopener">
           Check Price

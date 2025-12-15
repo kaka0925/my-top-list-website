@@ -64,8 +64,6 @@ body {
 }
 
 .hero-content {
-    max-width: 1000px;
-    margin: 0 auto;
     padding: 50px 20px;
     background: #ffffff;
     border-radius: 10px;
@@ -271,7 +269,7 @@ body {
     margin-bottom: 60px;
 }
 
-.categories-section .container {
+.categories-content {
     background: #ffffff;
     padding: 50px 20px;
     border-radius: 10px;
@@ -282,8 +280,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 16px;
-    max-width: 1000px;
-    margin: 0 auto;
 }
 
 .category-item {
@@ -404,10 +400,10 @@ body {
 }
 
 .footer-content {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     gap: 50px;
     margin-bottom: 50px;
 }
@@ -446,7 +442,7 @@ body {
 }
 
 .footer-bottom {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding-top: 35px;
     border-top: 1px solid #404040;
@@ -531,7 +527,7 @@ body {
         margin-bottom: 40px;
     }
 
-    .categories-section .container {
+    .categories-content {
         padding: 40px 15px;
     }
 

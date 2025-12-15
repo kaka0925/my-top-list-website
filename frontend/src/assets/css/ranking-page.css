@@ -218,6 +218,7 @@ body {
     font-size: 17px;
     font-weight: 700;
     color: #000000;
+    margin-top: 12px;
     margin-bottom: 12px;
     letter-spacing: -0.4px;
 }
@@ -239,7 +240,7 @@ body {
 
 .stars {
     color: #ffa500;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .rating-text {
@@ -248,7 +249,7 @@ body {
 }
 
 .product-features {
-    margin: 10px 0;
+    margin: 16px 0 10px 0;
 }
 
 .feature-item {
@@ -314,14 +315,20 @@ body {
 .product-action {
     text-align: center;
     min-width: 150px;
+    padding: 16px 12px;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    margin-top: 12px;
 }
 
 .expert-score {
-    background: #f5f5f5;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 0 8px 0;
+    margin-bottom: 12px;
+    border-bottom: 2px solid;
+    border-image: linear-gradient(to right, #1e88e5, #64b5f6, transparent) 1;
 }
 
 .expert-score-label {
@@ -349,7 +356,7 @@ body {
 
 .stars-rating .stars {
     color: #ffa500;
-    font-size: 13px;
+    font-size: 20px;
 }
 
 .stars-rating .rating-value {
@@ -880,10 +887,10 @@ body {
 }
 
 .footer-content {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     gap: 50px;
     margin-bottom: 40px;
 }
@@ -922,7 +929,7 @@ body {
 }
 
 .footer-bottom {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding-top: 30px;
     border-top: 1px solid #333333;
@@ -1228,61 +1235,33 @@ body {
     position: relative;
 }
 
-/* Ribbon Badge for Best Overall, Most Reviewed, etc. - Enhanced Parallelogram Style */
+/* Ribbon Badge - Clean Modern Style */
 .ribbon-badge {
     position: absolute;
-    top: -10px;
-    left: 20px;
-    transform: skewX(-15deg);
+    top: -8px;
+    left: 12px;
+    transform: skewX(-12deg);
     background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
     color: white;
-    padding: 5px 20px 5px 16px;
-    font-size: 11px;
+    padding: 4px 12px;
+    font-size: 10px;
     font-weight: 700;
-    box-shadow: 0 3px 12px rgba(255, 152, 0, 0.4);
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(255, 152, 0, 0.35);
     z-index: 3;
     white-space: nowrap;
-    position: relative;
-    overflow: visible;
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Left fold effect */
+/* Subtle accent dot */
 .ribbon-badge::before {
-    content: '';
+    content: '●';
     position: absolute;
-    left: -8px;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 8px 26px 0;
-    border-color: transparent #e65100 transparent transparent;
-    transform: skewX(15deg);
-}
-
-/* Right arrow effect */
-.ribbon-badge::after {
-    content: '';
-    position: absolute;
-    right: -10px;
+    left: 4px;
     top: 50%;
-    transform: translateY(-50%) skewX(15deg);
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 13px 0 13px 10px;
-    border-color: transparent transparent transparent #f57c00;
-}
-
-/* Top highlight */
-.ribbon-badge:before:first-of-type {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) skewX(12deg);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 6px;
 }
 
 /* Features with check icons */
@@ -1314,4 +1293,67 @@ body {
     font-size: 11px;
     color: #666;
     font-weight: 500;
+}
+
+/* Trust Sidebar - Fixed on Right */
+.trust-sidebar-fixed {
+    position: fixed;
+    left: calc(50% + 520px);
+    top: 150px;
+    width: 280px;
+    z-index: 100;
+}
+
+.menu-item {
+    background: white;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.menu-item-header {
+    margin-bottom: 16px;
+}
+
+.header-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: -0.3px;
+    text-align: center;
+}
+
+.menu-item-content {
+    text-align: center;
+}
+
+.trust-text {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.trust-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+/* Hide sidebar on smaller screens */
+@media (max-width: 1400px) {
+    .trust-sidebar-fixed {
+        display: none;
+    }
 }
