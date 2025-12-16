@@ -85,16 +85,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import emailjs from '@emailjs/browser';
 import Navbar from '../components/Navbar.vue';
 import Footer from '../components/Footer.vue';
 
 // EmailJS Configuration
 // Get these from https://dashboard.emailjs.com/
-const EMAILJS_SERVICE_ID = 'service_xq27uc9';  // Replace with your EmailJS Service ID
-const EMAILJS_TEMPLATE_ID = 'template_cd6031i'; // Replace with your EmailJS Template ID
-const EMAILJS_PUBLIC_KEY = 'ToBL747lRhjEwlpaJ';   // Replace with your EmailJS Public Key
+const EMAILJS_SERVICE_ID = 'service_17trq6b';
+const EMAILJS_TEMPLATE_ID = 'template_cd6031i';
+const EMAILJS_PUBLIC_KEY = 'ToBL747lRhjEwlpaJ';
 
 const formData = ref({
   firstName: '',
@@ -108,6 +108,16 @@ const isSubmitting = ref(false);
 const submitMessage = ref('');
 const submitSuccess = ref(false);
 
+// Initialize EmailJS when component mounts
+onMounted(() => {
+  try {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    console.log('EmailJS initialized successfully');
+  } catch (error) {
+    console.error('EmailJS initialization error:', error);
+  }
+});
+
 const handleSubmit = async () => {
   isSubmitting.value = true;
   submitMessage.value = '';
@@ -119,15 +129,17 @@ const handleSubmit = async () => {
       from_email: formData.value.email,
       company: formData.value.company || 'N/A',
       message: formData.value.message,
-      to_name: 'BuyerReviewsGuide Team'
+      to_name: 'BuyerReviewsGuide Team',
+      time: new Date().toLocaleString('zh-CN')  // 添加时间参数
     };
+
+    console.log('Sending email with params:', templateParams);
 
     // Send email using EmailJS
     const response = await emailjs.send(
       EMAILJS_SERVICE_ID,
       EMAILJS_TEMPLATE_ID,
-      templateParams,
-      EMAILJS_PUBLIC_KEY
+      templateParams
     );
 
     console.log('Email sent successfully:', response);
@@ -145,8 +157,12 @@ const handleSubmit = async () => {
     };
   } catch (error) {
     console.error('EmailJS error:', error);
+    console.error('Error details:', error.text || error.message);
     submitSuccess.value = false;
-    submitMessage.value = 'Sorry, there was an error sending your message. Please try again.';
+
+    // Show detailed error message for debugging
+    const errorMsg = error.text || error.message || 'Unknown error';
+    submitMessage.value = `Error: ${errorMsg}. Please check the console for details.`;
   } finally {
     isSubmitting.value = false;
   }
