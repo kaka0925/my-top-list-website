@@ -1,0 +1,78 @@
+#===================================================#
+# ClashX 配置文件 - 自动智能分流
+# 工作IP用于敏感网站，其他直连
+#===================================================#
+
+mode: rule
+log-level: info
+
+proxies:
+  # 工作IP - 敏感网站出口
+  - name: "工作IP"
+    type: socks5
+    server: 38.248.238.183
+    port: 443
+    username: NfmeaMcydugR
+    password: unpEXyvQJs
+
+proxy-groups:
+  # 敏感网站代理组
+  - name: "工作敏感网站"
+    type: select
+    proxies:
+      - 工作IP
+      - DIRECT
+
+rules:
+  # -----------------------
+  # 敏感网站 → 使用工作IP
+  # 全部使用关键字匹配，确保所有子域名 IP 一致
+  # -----------------------
+  - DOMAIN-KEYWORD,google,工作敏感网站
+  - DOMAIN-KEYWORD,youtube,工作敏感网站
+  - DOMAIN-KEYWORD,facebook,工作敏感网站
+  - DOMAIN-KEYWORD,instagram,工作敏感网站
+  - DOMAIN-KEYWORD,whatsapp,工作敏感网站
+  - DOMAIN-KEYWORD,reddit,工作敏感网站
+  - DOMAIN-KEYWORD,linkedin,工作敏感网站
+  - DOMAIN-KEYWORD,github,工作敏感网站
+  - DOMAIN-KEYWORD,gitlab,工作敏感网站
+  - DOMAIN-KEYWORD,slack,工作敏感网站
+  - DOMAIN-KEYWORD,notion,工作敏感网站
+  - DOMAIN-KEYWORD,zoom,工作敏感网站
+  - DOMAIN-KEYWORD,openai,工作敏感网站
+  - DOMAIN-KEYWORD,anthropic,工作敏感网站
+  - DOMAIN-KEYWORD,quora,工作敏感网站
+  - DOMAIN-KEYWORD,slickdeals,工作敏感网站
+  - DOMAIN-KEYWORD,dealnews,工作敏感网站
+  - DOMAIN-KEYWORD,iping,工作敏感网站
+
+
+  # -----------------------
+  # 本地/特殊规则
+  # -----------------------
+  # ngrok直连
+  - DOMAIN-SUFFIX,ngrok.io,DIRECT
+  - DOMAIN-SUFFIX,ngrok.com,DIRECT
+
+  # 中国网站直连
+  - DOMAIN-SUFFIX,baidu.com,DIRECT
+  - DOMAIN-SUFFIX,taobao.com,DIRECT
+  - DOMAIN-SUFFIX,qq.com,DIRECT
+  - DOMAIN-SUFFIX,weixin.qq.com,DIRECT
+
+  # 广告拦截
+  - DOMAIN-SUFFIX,ad.com,REJECT
+
+  # 中国 IP 直连
+  - GEOIP,CN,DIRECT
+
+  # 局域网直连
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT
+
+  # -----------------------
+  # 默认规则：其他流量直连 
+  # -----------------------
+  - MATCH,DIRECT
